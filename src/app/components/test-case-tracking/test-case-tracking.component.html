@@ -13,7 +13,7 @@
         </div>
         <div class="flex items-center pr-4 gap-3">
           <p-button label="Create Test case" (onClick)="showDialog = !showDialog"></p-button>
-          <p-button label="Bulk upload" (onClick)="showPopup = !showPopup"></p-button>
+          <p-button label="Bulk upload" (onClick)="togglePopUp()"></p-button>
         </div>
       </div>
     </div>
@@ -120,7 +120,7 @@
     </div>
   </div>
 </div>
-<app-bulk-upload [isVisible]="showPopup" (close)="showPopup = !showPopup"></app-bulk-upload>
+<app-bulk-upload [isVisible]="showPopup" (close)="togglePopUp()"></app-bulk-upload>
 
 <p-dialog [modal]="true" appendTo="body" [(visible)]="showDialog" [style]="{ width: '50rem' }">
   <ng-template pTemplate="header">

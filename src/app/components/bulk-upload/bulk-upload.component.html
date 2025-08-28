@@ -1,7 +1,6 @@
-<!-- bulk-upload.component.html -->
-<div class="modal-overlay" appendTo="body" *ngIf="isVisible" (click)="closeModal()">
-    <div class="modal-content" (click)="$event.stopPropagation()">
-        <div class="modal-header">
+<p-dialog appendTo="body" [(visible)]="isVisible" [closable]="false" (click)="closeModal()">
+     <ng-template pTemplate="header">
+        <div>
             <h2>
                 <i class="fas fa-upload me-2"></i>
                 Bulk Upload Test Cases
@@ -10,8 +9,8 @@
                 <i class="fas fa-times"></i>
             </button>
         </div>
-
-        <div class="modal-body">
+     </ng-template>
+        <div>
             <!-- Upload Form -->
             <form [formGroup]="uploadForm" *ngIf="!showResult">
                 <div class="form-row">
@@ -219,5 +218,4 @@
                 Done
             </button>
         </div>
-    </div>
-</div>
+</p-dialog>

@@ -256,4 +256,8 @@ export class TestCaseTrackingComponent implements OnInit {
     const tester = this.testers.find(t => t.id === testerId);
     return tester ? tester.name : 'Unknown Tester';
   }
+
+  togglePopUp() : void {
+    this.showPopup = !this.showPopup;
+  }
 }
