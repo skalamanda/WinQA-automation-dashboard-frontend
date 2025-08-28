@@ -8,7 +8,7 @@ import { BehaviorSubject } from "rxjs";
   providedIn: "root",
 })
 export class AppService {
-  userPermission: UserPermission | undefined;
+  userPermission: string | undefined;
   isAuthorised: boolean = false;
   token:string = '';
   authenticated = new BehaviorSubject(false);

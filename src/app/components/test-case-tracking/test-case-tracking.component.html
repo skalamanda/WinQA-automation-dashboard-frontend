@@ -122,7 +122,7 @@
 </div>
 <app-bulk-upload [isVisible]="showPopup" (close)="showPopup = !showPopup"></app-bulk-upload>
 
-<p-dialog [modal]="true" [(visible)]="showDialog" [style]="{ width: '50rem' }">
+<p-dialog [modal]="true" appendTo="body" [(visible)]="showDialog" [style]="{ width: '50rem' }">
   <ng-template pTemplate="header">
     <div>
       <h5 class="card-title mb-0">
@@ -134,7 +134,7 @@
   </ng-template>
   <div>
     <div>
-      <form [formGroup]="testCaseForm" (ngSubmit)="onSubmit()">
+      <form [formGroup]="testCaseForm"  (ngSubmit)="onSubmit()">
         <div class="mb-3">
           <label for="title" class="form-label">Test Case Title</label>
           <input type="text" class="form-control" id="title" formControlName="title"

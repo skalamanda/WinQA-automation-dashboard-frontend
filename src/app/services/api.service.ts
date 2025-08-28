@@ -236,7 +236,7 @@ export class ApiService {
 
   // NEW: Get unique job frequencies
   getJobFrequencies(): Observable<string[]> {
-    return this.http.get<string[]>(`${this.baseUrl}/jenkins/job-frequencies`)
+    return this.http.get<string[]>(`${this.baseUrl}/jenkins/frequencies`)
       .pipe(catchError(this.handleError));
   }
 
@@ -359,6 +359,18 @@ export class ApiService {
           return this.handleError(error);
         })
       );
+  }
+
+  saveManualTestCase(testCaseId:any, canBeAutomated:boolean, cannotBeAutomated:boolean,projectId:any, testerId:any, domainId:any ):Observable<any> {
+      const mappingData = {
+      projectId: projectId,
+      testerId: testerId,
+      domainId: domainId,
+      canBeAutomated: canBeAutomated,
+      cannotBeAutomated: cannotBeAutomated
+      // Note: domainId will be handled by project selection
+    };
+    return this.http.put<any>(`${this.baseUrl}/manual-page/test-cases/${testCaseId}/save`, mappingData, this.httpOptions)
   }
 
   searchKeywordInComments(jiraKey: string, request: { keyword: string }): Observable<any> {
@@ -579,4 +591,6 @@ saveJenkinsJobData(resultId: number, data: {
 
     return throwError(() => errorMessage);
   }
+
+
 }

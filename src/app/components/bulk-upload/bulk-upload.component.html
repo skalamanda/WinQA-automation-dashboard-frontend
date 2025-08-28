@@ -1,5 +1,5 @@
 <!-- bulk-upload.component.html -->
-<div class="modal-overlay" *ngIf="isVisible" (click)="closeModal()">
+<div class="modal-overlay" appendTo="body" *ngIf="isVisible" (click)="closeModal()">
     <div class="modal-content" (click)="$event.stopPropagation()">
         <div class="modal-header">
             <h2>

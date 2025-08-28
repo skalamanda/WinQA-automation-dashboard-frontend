@@ -31,7 +31,7 @@ export class TesterRegistrationComponent implements OnInit {
       experience: [0, [Validators.required, Validators.min(0)]], // Added experience field
     });
     this.showRegistration =
-      this.appService.userPermission?.permission === environment.appWrite;
+      this.appService.userPermission === environment.appWrite;
   }
 
   ngOnInit(): void {

@@ -115,7 +115,7 @@ export class LoginDashboardComponent {
   sessionLogin(): void {
     let value = this.sessionStorageService.getWithExpiry("userInfo");
     if (value) {
-      this.appService.userPermission = value.userPermissions;
+      this.appService.userPermission = value.permission;
       this.appService.token = value.token;
       this.appService.authenticated.next(true);
       this.authenticated.emit(true);

@@ -387,8 +387,7 @@ export class ManualCoverageComponent implements OnInit {
     
     this.showTestCaseModal = true;
     
-    // Refresh test case data to ensure we have the latest information
-    this.refreshTestCaseData(testCase.id);
+    // this.refreshTestCaseData(testCase.id);
   }
 
   // Refresh test case data from the backend
@@ -711,83 +710,97 @@ export class ManualCoverageComponent implements OnInit {
     this.loading = true;
     const testCaseId = this.selectedTestCase.id;
     
-    console.log('Saving test case information:', {
-      testCaseId,
-      automationFlags: {
-        canBeAutomated: this.selectedTestCase.canBeAutomated,
-        cannotBeAutomated: this.selectedTestCase.cannotBeAutomated
-      },
-      hasInfoChanges: this.hasInfoChanges(),
-      infoChanges: {
-        projectId: this.selectedTestCaseProject?.id || null,
-        testerId: this.selectedTestCaseTester?.id || null,
-        domainId: this.selectedTestCaseDomain?.id || null
-      }
-    });
+    // console.log('Saving test case information:', {
+    //   testCaseId,
+    //   automationFlags: {
+    //     canBeAutomated: this.selectedTestCase.canBeAutomated,
+    //     cannotBeAutomated: this.selectedTestCase.cannotBeAutomated
+    //   },
+    //   hasInfoChanges: this.hasInfoChanges(),
+    //   infoChanges: {
+    //     projectId: this.selectedTestCaseProject?.id || null,
+    //     testerId: this.selectedTestCaseTester?.id || null,
+    //     domainId: this.selectedTestCaseDomain?.id || null
+    //   }
+    // });
     
-    // Prepare all updates to be saved together
-    const updates = [];
+    // // Prepare all updates to be saved together
+    // const updates = [];
     
-    // Add automation flags update
-    updates.push(
-      this.apiService.updateTestCaseAutomationFlags(testCaseId, {
-        canBeAutomated: this.selectedTestCase.canBeAutomated,
-        cannotBeAutomated: this.selectedTestCase.cannotBeAutomated
-      }).toPromise()
-    );
+    // // Add automation flags update
+    // updates.push(
+    //   this.apiService.updateTestCaseAutomationFlags(testCaseId, {
+    //     canBeAutomated: this.selectedTestCase.canBeAutomated,
+    //     cannotBeAutomated: this.selectedTestCase.cannotBeAutomated
+    //   }).toPromise()
+    // );
     
-    // Add test case information update if there are changes
-    if (this.hasInfoChanges()) {
-      const updateData = {
-        projectId: this.selectedTestCaseProject?.id || null,
-        testerId: this.selectedTestCaseTester?.id || null,
-        domainId: this.selectedTestCaseDomain?.id || null
-      };
+    // // Add test case information update if there are changes
+    // if (this.hasInfoChanges()) {
+    //   const updateData = {
+    //     projectId: this.selectedTestCaseProject?.id || null,
+    //     testerId: this.selectedTestCaseTester?.id || null,
+    //     domainId: this.selectedTestCaseDomain?.id || null
+    //   };
       
-      console.log('Sending mapping update:', updateData);
+    //   console.log('Sending mapping update:', updateData);
       
-      updates.push(
-        this.apiService.updateTestCaseInformation(testCaseId, updateData).toPromise()
-      );
-    }
+    //   updates.push(
+    //     this.apiService.updateTestCaseInformation(testCaseId, updateData).toPromise()
+    //   );
+    // }
     
-    // Execute all updates in parallel
-    Promise.all(updates)
-      .then((results) => {
-        console.log('All updates completed successfully:', results);
+    // // Execute all updates in parallel
+    // Promise.all(updates)
+    //   .then((results) => {
+    //     console.log('All updates completed successfully:', results);
         
-        // Update local test case with results
-        results.forEach((result) => {
-          if (result) {
-            this.updateLocalTestCase(result);
+    //     // Update local test case with results
+    //     results.forEach((result) => {
+    //       if (result) {
+    //         this.updateLocalTestCase(result);
             
-            // Update selected test case for immediate UI feedback
-            if (this.selectedTestCase && this.selectedTestCase.id === testCaseId) {
-              this.selectedTestCase = { ...this.selectedTestCase, ...result };
-            }
-          }
-        });
+    //         // Update selected test case for immediate UI feedback
+    //         if (this.selectedTestCase && this.selectedTestCase.id === testCaseId) {
+    //           this.selectedTestCase = { ...this.selectedTestCase, ...result };
+    //         }
+    //       }
+    //     });
         
+    //     this.loading = false;
+        
+    //     // Refresh statistics
+    //     if (this.selectedSprint) {
+    //       this.loadSprintStatistics(this.selectedSprint.id);
+    //     }
+        
+    //     // Close the modal after successful save
+    //     this.closeTestCaseModal();
+        
+    //     // Show success message
+    //     console.log('Test case updated successfully');
+    //   })
+    //   .catch((error) => {
+    //     console.error('Error saving test case:', error);
+    //     this.loading = false;
+        
+    //     // Show user-friendly error message
+    //     alert(`Error saving test case: ${error.message || 'Please try again.'}`);
+    //   });
+
+      this.apiService.saveManualTestCase(this.selectedTestCase.id,
+        this.selectedTestCase.canBeAutomated, 
+        this.selectedTestCase.cannotBeAutomated,
+         this.selectedTestCase.projectId,
+        this.selectedTestCaseTester?.id,
+      this.selectedDomain?.id).subscribe(
+     {
+      next:(value)=> {
+        console.log(value)
         this.loading = false;
-        
-        // Refresh statistics
-        if (this.selectedSprint) {
-          this.loadSprintStatistics(this.selectedSprint.id);
-        }
-        
-        // Close the modal after successful save
-        this.closeTestCaseModal();
-        
-        // Show success message
-        console.log('Test case updated successfully');
-      })
-      .catch((error) => {
-        console.error('Error saving test case:', error);
-        this.loading = false;
-        
-        // Show user-friendly error message
-        alert(`Error saving test case: ${error.message || 'Please try again.'}`);
-      });
+      },
+     }
+      )
   }
 
   // Helper method to check if test case information has changed

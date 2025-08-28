@@ -36,7 +36,7 @@ export class ProjectManagementComponent implements OnInit {
       jiraBoardId: ["", [Validators.pattern(/^\d*$/)]] // Only numeric values
     });
     this.showRegistration =
-      this.appService.userPermission?.permission === environment.appWrite;
+      this.appService.userPermission === environment.appWrite;
   }
 
   ngOnInit(): void {

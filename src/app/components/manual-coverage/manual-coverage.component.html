@@ -114,7 +114,7 @@
                             <div class="col-md-4">
                                 <label for="domainFilter" class="form-label">Filter by Domain</label>
                                 <select class="form-select form-select-sm" id="domainFilter"
-                                        [(ngModel)]="selectedDomain" (change)="onDomainChange()">
+                                        [(ngModel)]="selectedDomain">
                                     <option [ngValue]="null">All Domains</option>
                                     <option *ngFor="let domain of domains" [ngValue]="domain">
                                         {{ domain.name }}
@@ -335,10 +335,10 @@
                                         Summary
                                         <i [class]="getSortIcon('summary')"></i>
                                     </th>
-                                    <th class="col-assignee" style="cursor: pointer;" (click)="sortBy('assigneeDisplayName')">
+                                    <!-- <th class="col-assignee" style="cursor: pointer;" (click)="sortBy('assigneeDisplayName')">
                                         Assignee
                                         <i [class]="getSortIcon('assigneeDisplayName')"></i>
-                                    </th>
+                                    </th> -->
                                     <th class="col-status" style="cursor: pointer;" (click)="sortBy('status')">
                                         Status
                                         <i [class]="getSortIcon('status')"></i>
@@ -367,13 +367,13 @@
                                     <td>
                                         <div class="issue-summary">{{ issue.summary }}</div>
                                     </td>
-                                    <td>
+                                    <!-- <td>
                                         <div *ngIf="issue.assigneeDisplayName">
                                             {{ issue.assigneeDisplayName }}
                                             <div class="text-muted small">{{ issue.assignee }}</div>
                                         </div>
                                         <span *ngIf="!issue.assigneeDisplayName" class="text-muted">Unassigned</span>
-                                    </td>
+                                    </td> -->
                                     <td>
                                         <span class="badge" [class]="getStatusColor(issue.status)">
                                             {{ issue.status }}
@@ -580,6 +580,7 @@
           [style]="{ width: '90vw', maxWidth: '1200px', height: '90vh', maxHeight: '800px' }"
           header="Test Case Details"
           [closable]="true"
+          appendTo="body"
           [dismissableMask]="false"
           [closeOnEscape]="false"
           [blockScroll]="true"
@@ -748,6 +749,7 @@
 <p-dialog [modal]="true"
           [(visible)]="showKeywordModal"
           [style]="{ width: '40rem' }"
+          appendTo="body"
           header="Search Keywords in Comments">
     <div *ngIf="selectedIssue">
         <div class="row">
