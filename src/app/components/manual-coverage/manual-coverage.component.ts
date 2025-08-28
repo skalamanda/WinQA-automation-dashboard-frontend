@@ -791,7 +791,7 @@ export class ManualCoverageComponent implements OnInit {
       this.apiService.saveManualTestCase(this.selectedTestCase.id,
         this.selectedTestCase.canBeAutomated, 
         this.selectedTestCase.cannotBeAutomated,
-         this.selectedTestCase.projectId,
+         this.selectedTestCaseProject?.id,
         this.selectedTestCaseTester?.id,
       this.selectedDomain?.id).subscribe(
      {
