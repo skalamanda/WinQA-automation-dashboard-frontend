@@ -330,8 +330,8 @@ export class BulkUploadComponent implements OnInit {
           continue;
         }
 
-        if (!testCase.description || testCase.description.trim().length < 10) {
-          result.errors.push(`Row ${i + 2}: Description is required and must be at least 10 characters long`);
+        if (!testCase.description || testCase.description.trim().length < 3) {
+          result.errors.push(`Row ${i + 2}: Description is required and must be at least 3 characters long`);
           result.errorCount++;
           continue;
         }

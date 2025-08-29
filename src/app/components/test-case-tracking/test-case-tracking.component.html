@@ -59,7 +59,7 @@
                 </th>
                 <th class="description-cell" (click)="sortTable('description')"
                   [class.sorted]="isSorted('description')">
-                  Description <i [class]="getSortIcon('description')"></i>
+                 Automation Test script or Description <i [class]="getSortIcon('description')"></i>
                 </th>
                 <th class="project-cell" (click)="sortTable('projectId')" [class.sorted]="isSorted('projectId')">
                   Project <i [class]="getSortIcon('projectId')"></i>
@@ -147,13 +147,13 @@
         </div>
 
         <div class="mb-3">
-          <label for="description" class="form-label">Description</label>
+          <label for="description" class="form-label">Description / Automation Test Script Name</label>
           <textarea class="form-control" id="description" rows="3" formControlName="description"
             [class.is-invalid]="testCaseForm.get('description')?.invalid && testCaseForm.get('description')?.touched"
             placeholder="Enter test case description"></textarea>
           <div class="invalid-feedback"
             *ngIf="testCaseForm.get('description')?.invalid && testCaseForm.get('description')?.touched">
-            Description is required and must be at least 10 characters long.
+            Description is required and must be at least 3 characters long.
           </div>
         </div>
 

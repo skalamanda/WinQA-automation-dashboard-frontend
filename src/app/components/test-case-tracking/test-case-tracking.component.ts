@@ -40,7 +40,7 @@ export class TestCaseTrackingComponent implements OnInit {
   ) {
     this.testCaseForm = this.fb.group({
       title: ['', [Validators.required, Validators.minLength(5)]],
-      description: ['', [Validators.required, Validators.minLength(10)]],
+      description: ['', [Validators.required, Validators.minLength(3)]],
       projectId: ['', Validators.required],
       testerId: ['', Validators.required],
       status: ['Ready to Automate', Validators.required],
