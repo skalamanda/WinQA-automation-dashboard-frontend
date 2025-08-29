@@ -1,4 +1,4 @@
-<p-dialog appendTo="body" [(visible)]="isVisible" [closable]="false" (click)="closeModal()">
+<p-dialog [modal]="true" appendTo="body" [(visible)]="isVisible" [closable]="false" (click)="closeModal()">
      <ng-template pTemplate="header">
         <div>
             <h2>
